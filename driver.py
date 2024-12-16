@@ -2,6 +2,7 @@ import argparse
 import os
 
 from errors import driver_error, driver_warning
+from lexer import lex
 from _version import __version__
 
 
@@ -51,6 +52,11 @@ def main():
     
     if not args.source.endswith(".vd"):
         driver_warning(f"'{args.source}' is not a .vd file")
+    
+    with open(args.source) as file:
+        source = file.read()
+    
+    lexer = lex(source)
 
 
 if __name__ == "__main__":
